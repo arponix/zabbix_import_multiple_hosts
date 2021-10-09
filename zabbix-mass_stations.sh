@@ -32,7 +32,7 @@ read -p 'Group Name: ' f_group;
 printf "<?xml version='1.0' encoding='UTF-8'?> \n" >> $f_output;
 printf "<zabbix_export> \n" >> $f_output;
 printf "\t<version>5.2</version> \n" >> $f_output;
-printf "\t<date>2021-05-03T19:37:07Z</date> \n" >> $f_output;
+printf "\t<date>"`date +"%Y-%m-%d-%T"`"</date> \n" >> $f_output;
 printf "\t<groups> \n" >> $f_output;
 printf "\t\t<group> \n" >> $f_output;
 printf "\t\t\t<name>"$f_group"</name> \n" >> $f_output;
