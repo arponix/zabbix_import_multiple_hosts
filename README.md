@@ -3,7 +3,7 @@
 ```Zabbix CLI is a command line interface to Zabbix server, at the moment it supports creating export multiple hosts file in XML format.```
 
 ```bash
-usage: zabbix_cli.py [-h] -i INPUT [-o OUTPUT] -g GROUP
+usage: zabbix_cli [-h] -i INPUT [-o OUTPUT] -g GROUP
 
 Zabbix command line interface
 
