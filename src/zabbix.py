@@ -34,11 +34,6 @@ class InventoryMode(str, Enum):
 
 
 class Host():
-    # name: string
-    # groups: [Group]
-    # interfaces: [Interface]
-    # inventory_mode: InventoryMode = InventoryMode.DISABLED
-
     def __init__(self, name, groups: [Group], interfaces: [Interface], inventory_mode):
         self.name = name
         self.groups = groups
