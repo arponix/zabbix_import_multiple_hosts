@@ -7,7 +7,7 @@ usage: zabbix_cli.py [-h] -i INPUT [-o OUTPUT] -g GROUP
 
 Zabbix command line interface
 
-optional arguments:
+arguments:
   -h, --help                    show this help message and exit
   -i INPUT, --input INPUT       Input file name which includes hosts name and address
   -o OUTPUT, --output OUTPUT    Export file name
