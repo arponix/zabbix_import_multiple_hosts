@@ -1,6 +1,5 @@
-import string
-from enum import Enum
 import datetime
+from enum import Enum
 
 
 class Group:
