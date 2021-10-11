@@ -11,7 +11,7 @@ if __name__ == '__main__':
     parser.add_argument('-g', "--group", help='Group name', required=True)
 
     if len(sys.argv) == 1:
-        parser.print_usage(sys.stderr)
+        parser.print_help(sys.stderr)
         sys.exit(1)
     args = vars(parser.parse_args())
 
