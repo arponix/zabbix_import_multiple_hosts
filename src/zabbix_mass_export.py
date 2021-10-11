@@ -2,6 +2,7 @@ import datetime
 import os
 import re
 import string
+import sys
 import xml.dom.minidom
 
 from zabbix import Host, Group, Interface, InventoryMode, Export
@@ -9,9 +10,9 @@ from zabbix import Host, Group, Interface, InventoryMode, Export
 
 class MassExport:
 
-    def read_hosts_file(self, file_name, group_name):
+    def execute(self, input_file_name, output_file_name, group_name):
         try:
-            with open(file_name, 'rb') as reader:
+            with open(input_file_name, 'rb') as reader:
                 hosts = []
                 for line in reader.readlines():
                     tokens = line.split()
@@ -23,7 +24,7 @@ class MassExport:
                         ip = tokens[1].decode("utf-8")
                         if not self.is_ip_address(ip):
                             print("[Failed] Invalid IP/Hostname in input file:", line.decode("utf-8"))
-                            exit(1)
+                            sys.exit(1)
                     host = Host(
                         ip,
                         groups,
@@ -31,15 +32,15 @@ class MassExport:
                         InventoryMode.DISABLED,
                     )
                     hosts.append(host)
-                self.export_to_file(os.path.splitext(file_name)[0] + ".xml", hosts)
-                self.export_to_server(hosts)
+            if output_file_name is None:
+                self.export_to_file(os.path.splitext(input_file_name)[0] + ".xml", hosts)
+            else:
+                self.export_to_file(output_file_name, hosts)
         except Exception as e:
             print(e)
 
-
     def is_ip_address(self, s: string):
         return re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", s)
-
 
     def export_to_file(self, file_name, hosts: [Host]):
         try:
@@ -51,6 +52,3 @@ class MassExport:
             print("[Success] Zabbix mass export file is created for", len(hosts), "host(s), please check", output)
         except Exception as e:
             print(e)
-
-    def export_to_server(self, hosts: [Host]):
-        pass  # todo: this method can be used to call Zabbix API for mass host creation pur pose
