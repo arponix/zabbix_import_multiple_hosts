@@ -27,19 +27,16 @@ read -p 'Group Name: ' f_group;
 
 #'File Output:' ;
 
-#$f_group = cat f_group_0 | sed -r 's/\s+//g' | tr "" " " ;
-
 printf "<?xml version='1.0' encoding='UTF-8'?> \n" >> $f_output;
 printf "<zabbix_export> \n" >> $f_output;
 printf "\t<version>5.2</version> \n" >> $f_output;
-printf "\t<date>"`date +"%Y-%m-%d-%T"`"</date> \n" >> $f_output;
+printf "\t<date>"`date +"%Y-%m-%dT%TZ"`"</date> \n" >> $f_output;
 printf "\t<groups> \n" >> $f_output;
 printf "\t\t<group> \n" >> $f_output;
 printf "\t\t\t<name>"$f_group"</name> \n" >> $f_output;
 printf "\t\t</group> \n" >> $f_output;
 printf "\t</groups> \n" >> $f_output;
 printf "\t<hosts> \n" >> $f_output;
-
 
 awk  -v Group=${f_group%%*( )} 'BEGIN {FS = " "} {IP=$1; hostname=$2}
 	{printf "<host>\n"; 
